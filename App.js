@@ -6,6 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 export default function App() {
 
     console.disableYellowBox = true;
+    const [estado, setarEstado] = useState('selecionar');
     const [segundos, setarSegundos] = useState(0);
     const [minutos, setarMinutos] = useState(0);
 
@@ -43,6 +44,7 @@ export default function App() {
       setarAlarmSound(alarmesTemp);
     }
 
+  if(estado == 'selecionar'){
   return (
     <View style={styles.container}>
       <StatusBar style="light" />
@@ -97,9 +99,18 @@ export default function App() {
           })  
         }
       </View>
+        <TouchableOpacity onPress={()=> setarEstado('iniciar')} style={styles.btnIniciar}><Text style={{textAlign:'center',paddingTop:26, color: 'white', fontSize:22}}>Iniciar</Text></TouchableOpacity>
       
     </View>
   );
+  }else if(estado == 'iniciar'){
+
+    return(
+      <View>
+        <Text>Funcionou</Text>
+      </View>  
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -126,5 +137,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     backgroundColor: 'rgb(113,0,255)'
-  }
+  },
+  btnIniciar: {
+    width:100,
+    height:100,
+    padding: 10,
+    marginTop: 80,
+    alignItems: 'center',
+    borderRadius: 50,
+    borderColor: 'rgba(214,89,163,1)',
+    borderWidth:1,
+    backgroundColor: 'rgb(113,0,255)'
+  },
 });
