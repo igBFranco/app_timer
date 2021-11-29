@@ -2,12 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, Picker , TouchableOpacity} from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import Contador from './contador';
 
 export default function App() {
 
     console.disableYellowBox = true;
     const [estado, setarEstado] = useState('selecionar');
-    const [segundos, setarSegundos] = useState(0);
+    const [segundos, setarSegundos] = useState(1);
     const [minutos, setarMinutos] = useState(0);
 
     const [alarmeSound, setarAlarmSound] = useState([
@@ -62,6 +63,7 @@ export default function App() {
       <View style={{flexDirection:'row'}}>
       <Text style={{color:'white', paddingTop:10}}>Min:</Text>
         <Picker itemStyle={{height:50}} selectedValue={minutos} onValueChange={(itemValue, itemIndex) => setarMinutos(itemValue)} style={{ height:50, width: 100, color: 'white'}}>
+          <Picker.Item label='0' value='0'/>
           {
           numeros.map(function(val){
             return(<Picker.Item label={val.toString()} value={val.toString()}/>);
@@ -71,8 +73,6 @@ export default function App() {
         </Picker>
         <Text style={{color:'white', paddingTop:10}}>Seg:</Text>
         <Picker itemStyle={{height:50}} selectedValue={segundos} onValueChange={(itemValue, itemIndex) => setarSegundos(itemValue)} style={{ height:50, width: 100, color: 'white'}}>
-          
-          <Picker.Item label='0' value='0'/>
           {
           numeros.map(function(val){
             return(<Picker.Item label={val.toString()} value={val.toString()}/>);
@@ -99,16 +99,14 @@ export default function App() {
           })  
         }
       </View>
-        <TouchableOpacity onPress={()=> setarEstado('iniciar')} style={styles.btnIniciar}><Text style={{textAlign:'center',paddingTop:26, color: 'white', fontSize:22}}>Iniciar</Text></TouchableOpacity>
+        <TouchableOpacity onPress={()=> setarEstado('iniciar')} style={styles.btnIniciar}><Text style={{textAlign:'center',paddingTop:26, color: 'rgb(113,0,255)', fontSize:22}}>Iniciar</Text></TouchableOpacity>
       
     </View>
   );
   }else if(estado == 'iniciar'){
 
     return(
-      <View>
-        <Text>Funcionou</Text>
-      </View>  
+      <Contador setarMinutos={setarMinutos} setarSegundos={setarSegundos} setarEstado={setarEstado} minutos={minutos} segundos={segundos}></Contador> 
     );
   }
 }
@@ -145,8 +143,9 @@ const styles = StyleSheet.create({
     marginTop: 80,
     alignItems: 'center',
     borderRadius: 50,
-    borderColor: 'rgba(214,89,163,1)',
+    borderColor: 'white',
     borderWidth:1,
-    backgroundColor: 'rgb(113,0,255)'
+    //backgroundColor: 'rgb(113,0,255)'
+    backgroundColor: 'white'
   },
 });
