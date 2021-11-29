@@ -68,14 +68,16 @@ export default function Contador(props) {
         }}
       />
       
-      <View style={{backgroundColor: 'rgba(255, 255, 255, 0.7)', width: '80%', height: '80%', borderRadius: 20, alignContent:'center', alignItems:`center`}}>
+      <View style={styles.card}>
 
-      <View style={{flexDirection: 'row'}}>
-        <Text style={styles.textContador}>{minutos} : </Text>
-        <Text style={styles.textContador}>{segundos}</Text>
-      </View>
+        <View style={{flexDirection: 'row', paddingBottom:10, paddingTop:300}}>
+            <Text style={styles.textContador}>{minutos} : </Text>
+            <Text style={styles.textContador}>{segundos}</Text>
+        </View>
 
-      <TouchableOpacity onPress={()=> resetar()} style={styles.btnIniciar}><Text style={{textAlign:'center',paddingTop:20, color: 'rgb(113,0,255)', fontSize:26}}>Resetar</Text></TouchableOpacity>
+        <View style={{paddingTop:150}}>
+            <TouchableOpacity onPress={()=> resetar()} style={styles.btnResetar}><Text style={{textAlign:'center',paddingTop:20, color: 'white', fontSize:26}}>Resetar</Text></TouchableOpacity>
+        </View>
       </View>
     </View>
     
@@ -95,16 +97,23 @@ const styles = StyleSheet.create({
     color: 'rgb(113,0,255)',
     fontSize:40,
   },
-  btnIniciar: {
+  card: {
+    display:'flex',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', 
+    width: '80%', 
+    height: '80%', 
+    borderRadius: 20, 
+    alignItems:`center`,
+  },
+  btnResetar: {
     width:200,
     height:80,
     padding: 4,
     marginTop: 80,
     alignItems: 'center',
     borderRadius: 20,
-    borderColor: 'white',
+    borderColor: 'rgb(113,0,255)',
     borderWidth:1,
-    //backgroundColor: 'rgb(113,0,255)'
-    backgroundColor: 'white'
+    backgroundColor: 'rgb(113,0,255)'
   },
 });

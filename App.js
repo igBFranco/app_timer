@@ -15,14 +15,14 @@ export default function App() {
       {
         id:1,
         selecionado: true,
-        som:'alarme 1',
+        som:'Alarme 1',
         file: 'alarm1.mp3'
       },
 
       {
         id:2,
         selecionado: false,
-        som:'alarme 2',
+        som:'Alarme 2',
         file:'alarm2.mp3'
       }
     ]);
@@ -59,48 +59,51 @@ export default function App() {
           height: '100%'
         }}
       />
-      <Text style={{color:'white', fontSize:30}}>Selecione o Tempo:</Text>
-      <View style={{flexDirection:'row'}}>
-      <Text style={{color:'white', paddingTop:10}}>Min:</Text>
-        <Picker itemStyle={{height:50}} selectedValue={minutos} onValueChange={(itemValue, itemIndex) => setarMinutos(itemValue)} style={{ height:50, width: 100, color: 'white'}}>
-          <Picker.Item label='0' value='0'/>
-          {
-          numeros.map(function(val){
-            return(<Picker.Item label={val.toString()} value={val.toString()}/>);
-          })
-          }
-          
-        </Picker>
-        <Text style={{color:'white', paddingTop:10}}>Seg:</Text>
-        <Picker itemStyle={{height:50}} selectedValue={segundos} onValueChange={(itemValue, itemIndex) => setarSegundos(itemValue)} style={{ height:50, width: 100, color: 'white'}}>
-          {
-          numeros.map(function(val){
-            return(<Picker.Item label={val.toString()} value={val.toString()}/>);
-          })
-          }
-          
-        </Picker>
-      </View>
+      <View style={styles.card}>
+        <Text style={{color:'rgb(113,0,255)', fontSize:30}}>Selecione o Tempo</Text>
+        <View style={{flexDirection:'row' ,padding:20}}>
+          <Text style={{color:'rgb(113,0,255)', paddingTop:95}}>Min:</Text>
+            <Picker selectedValue={minutos} onValueChange={(itemValue, itemIndex) => setarMinutos(itemValue)} style={{ height:180, width: 100, color: 'white'}}>
+              <Picker.Item label='0' value='0'/>
+              {
+              numeros.map(function(val){
+                return(<Picker.Item label={val.toString()} value={val.toString()}/>);
+              })
+              }
+              
+            </Picker>
+          <Text style={{color:'rgb(113,0,255)', paddingTop:95}}>Seg:</Text>
+            <Picker  selectedValue={segundos} onValueChange={(itemValue, itemIndex) => setarSegundos(itemValue)} style={{ height:50, width: 100, color: 'white'}}>
+              {
+              numeros.map(function(val){
+                return(<Picker.Item label={val.toString()} value={val.toString()}/>);
+              })
+              }
+              
+            </Picker>
+        </View>
 
-      <View style={{flexDirection:'row'}}>
-        {
-          alarmeSound.map(function(val){
-            if(val.selecionado){
-              return(<TouchableOpacity onPress={() =>setarAlarme(val.id)} style={styles.btnEscolherSelecionado}>
-                <Text style={{color: 'white'}}>{val.som}</Text>
-                </TouchableOpacity>
-              );
-            }else{
-              return(<TouchableOpacity onPress={() =>setarAlarme(val.id)} style={styles.btnEscolher}>
-                <Text style={{color: 'white'}}>{val.som}</Text>
-                </TouchableOpacity>
-              );
-            }
-          })  
-        }
+        <View style={{flexDirection:'row', paddingTop:200}}>
+          {
+            alarmeSound.map(function(val){
+              if(val.selecionado){
+                return(<TouchableOpacity onPress={() =>setarAlarme(val.id)} style={styles.btnEscolherSelecionado}>
+                  <Text style={{color: 'white'}}>{val.som}</Text>
+                  </TouchableOpacity>
+                );
+              }else{
+                return(<TouchableOpacity onPress={() =>setarAlarme(val.id)} style={styles.btnEscolher}>
+                  <Text style={{color: 'white'}}>{val.som}</Text>
+                  </TouchableOpacity>
+                );
+              }
+            })  
+          }
+        </View>
+        <View style={{justifyContent:'flex-end'}}>
+          <TouchableOpacity onPress={()=> setarEstado('iniciar')} style={styles.btnIniciar}><Text style={{textAlign:'center',paddingTop:22, color: 'white', fontSize:22}}>Iniciar</Text></TouchableOpacity>
+        </View>
       </View>
-        <TouchableOpacity onPress={()=> setarEstado('iniciar')} style={styles.btnIniciar}><Text style={{textAlign:'center',paddingTop:26, color: 'rgb(113,0,255)', fontSize:22}}>Iniciar</Text></TouchableOpacity>
-      
     </View>
   );
   }else if(estado == 'iniciar'){
@@ -125,8 +128,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
     backgroundColor: 'rgba(113,0,255, 0.5)',
-    borderColor: 'rgba(113,0,255, 1)',
-    borderWidth: 0.3
   },
   btnEscolherSelecionado: {
     width:100,
@@ -137,15 +138,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgb(113,0,255)'
   },
   btnIniciar: {
-    width:100,
-    height:100,
-    padding: 10,
+    width:200,
+    height:80,
+    padding: 4,
     marginTop: 80,
     alignItems: 'center',
-    borderRadius: 50,
-    borderColor: 'white',
+    borderRadius: 20,
+    borderColor: 'rgb(113,0,255)',
     borderWidth:1,
-    //backgroundColor: 'rgb(113,0,255)'
-    backgroundColor: 'white'
+    backgroundColor: 'rgb(113,0,255)',
+  },
+  card: {
+    display:'flex',
+    backgroundColor: 'rgba(255, 255, 255, 0.7)', 
+    width: '80%', 
+    height: '80%', 
+    borderRadius: 20, 
+    alignItems:`center`,
+    padding:40,
   },
 });
