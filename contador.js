@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Picker , TouchableOpacity} from 'react-native';
+import { Audio } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 
 export default function Contador(props) {
@@ -23,7 +24,8 @@ export default function Contador(props) {
                         props.setarEstado('selecionar');
                         props.setarMinutos(0);
                         props.setarSegundos(1);
-                        alert('O Tempo Acabou')
+                        playSound();
+                        alert('O Tempo Acabou');
                     }
                 }
             }
@@ -34,11 +36,29 @@ export default function Contador(props) {
 
     })
 
+    async function playSound(){
+      const soundObject = new Audio.Sound();
+        try {
+          var alarme;
+          props.alarmes.map(function(val){
+              if(val.selecionado){
+                alarme = val.file;
+              }
+          })
+            await soundObject.loadAsync(alarme);
+            await soundObject.playAsync();
+
+            await sound.unloadAsync();
+        } catch (error) {
+          
+        }
+    }
+
 
     function resetar(){
         props.setarEstado('selecionar');
-        props.setarMinutos(1);
-        props.setarSegundos(0);
+        props.setarMinutos(0);
+        props.setarSegundos(1);
     }
 
     function formatarNumero(number){
@@ -70,12 +90,12 @@ export default function Contador(props) {
       
       <View style={styles.card}>
 
-        <View style={{flexDirection: 'row', paddingBottom:10, paddingTop:300}}>
+        <View style={{flexDirection: 'row', paddingBottom:'5%', paddingTop:'50%'}}>
             <Text style={styles.textContador}>{minutos} : </Text>
             <Text style={styles.textContador}>{segundos}</Text>
         </View>
 
-        <View style={{paddingTop:150}}>
+        <View style={{paddingTop:'70%'}}>
             <TouchableOpacity onPress={()=> resetar()} style={styles.btnResetar}><Text style={{textAlign:'center',paddingTop:20, color: 'white', fontSize:26}}>Resetar</Text></TouchableOpacity>
         </View>
       </View>

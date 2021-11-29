@@ -16,14 +16,21 @@ export default function App() {
         id:1,
         selecionado: true,
         som:'Alarme 1',
-        file: 'alarm1.mp3'
+        file: require('./assets/alarme1.mp3')
       },
 
       {
         id:2,
         selecionado: false,
         som:'Alarme 2',
-        file:'alarm2.mp3'
+        file: require('./assets/alarme2.mp3')
+      },
+
+      {
+        id:3,
+        selecionado: false,
+        som:'Alarme 3',
+        file: require('./assets/alarme3.mp3')
       }
     ]);
 
@@ -83,7 +90,7 @@ export default function App() {
             </Picker>
         </View>
 
-        <View style={{flexDirection:'row', paddingTop:200}}>
+        <View style={{flexDirection:'row', paddingTop:'70%'}}>
           {
             alarmeSound.map(function(val){
               if(val.selecionado){
@@ -109,7 +116,7 @@ export default function App() {
   }else if(estado == 'iniciar'){
 
     return(
-      <Contador setarMinutos={setarMinutos} setarSegundos={setarSegundos} setarEstado={setarEstado} minutos={minutos} segundos={segundos}></Contador> 
+      <Contador alarmes={alarmeSound} setarMinutos={setarMinutos} setarSegundos={setarSegundos} setarEstado={setarEstado} minutos={minutos} segundos={segundos}></Contador> 
     );
   }
 }
@@ -122,7 +129,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   btnEscolher: {
-    width:100,
+    width:80,
     padding: 8,
     marginRight: 10,
     alignItems: 'center',
@@ -130,7 +137,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(113,0,255, 0.5)',
   },
   btnEscolherSelecionado: {
-    width:100,
+    width:80,
     padding: 8,
     marginRight: 10,
     alignItems: 'center',
@@ -141,7 +148,7 @@ const styles = StyleSheet.create({
     width:200,
     height:80,
     padding: 4,
-    marginTop: 80,
+    marginTop: 20,
     alignItems: 'center',
     borderRadius: 20,
     borderColor: 'rgb(113,0,255)',
